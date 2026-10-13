@@ -79,23 +79,29 @@ body {
   letter-spacing: 0.12em;
 }
 
-/* Gallery Room & Canvas Grid */
+/* Gallery Room & Canvas Grid (Quadri ancorati alla parete) */
 .gallery-wrapper {
-  padding: 48px 48px 80px;
-  max-width: 1650px;
-  margin: 0 auto;
+  padding: 48px 60px 80px;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  gap: 36px;
+  grid-template-columns: repeat(3, 380px);
+  gap: 40px;
+  justify-content: start;
+  width: max-content;
 }
 
-/* Canvas Image Items (Floating Museum Canvases) */
+/* Canvas Image Items (Quadri fisici con dimensioni e posizione ancorate) */
 .image-item {
+  width: 380px;
+  height: 213.75px; /* rapporto 16:9 fisso al millimetro */
+  flex-shrink: 0;
   position: relative;
-  aspect-ratio: 16 / 9;
   border-radius: 4px;
   overflow: hidden;
   background-color: #0d0e12;
@@ -305,12 +311,5 @@ body {
     border-left: none;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding: 22px;
-  }
-  .gallery-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  .gallery-wrapper {
-    padding: 24px 20px;
   }
 }
