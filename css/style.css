@@ -1,16 +1,27 @@
 /* ==========================================================================
-   Arturo Tramontini — Mandelbrot Minimalist Gallery
+   Arturo Tramontini — Mandelbrot Art Gallery
+   Warm Textured Gallery Wall & Museum Canvas Aesthetic
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  --bg-main: #08090d;
-  --bg-modal: #10121a;
-  --text-main: #f2f5fc;
-  --text-muted: #848f9f;
-  --accent-cyan: #00d2ff;
-  --border-light: rgba(255, 255, 255, 0.08);
+  --text-primary: #1c1a18;
+  --text-secondary: #6e675f;
+  --text-muted: #948c82;
+  --border-subtle: rgba(50, 40, 30, 0.08);
+  --accent-gold: #c29b38;
+  --accent-dark: #121110;
+  
+  --shadow-frame: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.07),
+    0 16px 28px -6px rgba(35, 25, 15, 0.18),
+    0 28px 45px -10px rgba(0, 0, 0, 0.12);
+
+  --shadow-frame-hover: 
+    0 6px 10px -1px rgba(0, 0, 0, 0.09),
+    0 22px 38px -8px rgba(35, 25, 15, 0.25),
+    0 38px 60px -12px rgba(0, 0, 0, 0.18);
 }
 
 *, *::before, *::after {
@@ -20,73 +31,83 @@
 }
 
 body {
-  background-color: var(--bg-main);
-  color: var(--text-main);
+  background-color: #f3efe6;
+  background-image: 
+    radial-gradient(ellipse at 50% 15%, rgba(255, 255, 255, 0.6) 0%, rgba(40, 30, 20, 0.06) 100%),
+    url('../images/gallery_wall_texture.jpg');
+  background-size: cover, 1200px 1200px;
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed;
+  color: var(--text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   min-height: 100vh;
-  padding: 0;
   margin: 0;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Minimal Header */
+/* Minimal Gallery Header */
 .minimal-header {
-  padding: 24px 32px 16px;
+  padding: 32px 48px 20px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(243, 239, 230, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .header-content {
   display: flex;
   align-items: baseline;
-  gap: 12px;
+  gap: 16px;
 }
 
 .site-title {
-  font-size: 1.15rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: var(--text-main);
+  color: var(--text-primary);
 }
 
 .site-subtitle {
-  font-size: 0.85rem;
-  color: var(--accent-cyan);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
   font-family: 'JetBrains Mono', monospace;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.12em;
 }
 
-/* Gallery Wrapper & Grid */
+/* Gallery Room & Canvas Grid */
 .gallery-wrapper {
-  padding: 28px 32px 60px;
-  max-width: 1600px;
+  padding: 48px 48px 80px;
+  max-width: 1650px;
   margin: 0 auto;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 36px;
 }
 
-/* Solo Immagini nella Griglia */
+/* Canvas Image Items (Floating Museum Canvases) */
 .image-item {
   position: relative;
   aspect-ratio: 16 / 9;
-  border-radius: 12px;
+  border-radius: 4px;
   overflow: hidden;
-  background-color: #000;
+  background-color: #0d0e12;
   cursor: pointer;
-  border: 1px solid var(--border-light);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: var(--shadow-frame);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
 }
 
 .image-item:hover {
-  transform: translateY(-4px) scale(1.01);
-  border-color: rgba(0, 210, 255, 0.4);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 210, 255, 0.15);
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: var(--shadow-frame-hover);
 }
 
 .image-item img {
@@ -94,20 +115,20 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
 .image-item:hover img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
-/* Modal Popup */
+/* Modal Popup (Exhibition Darkroom Viewer) */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(14, 13, 12, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,29 +145,30 @@ body {
 }
 
 .modal-dialog {
-  background: var(--bg-modal);
-  border: 1px solid var(--border-light);
-  border-radius: 16px;
-  max-width: 1100px;
+  background: #181715;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  max-width: 1140px;
   width: 100%;
   max-height: 90vh;
   display: flex;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95);
+  color: #f4f1ea;
 }
 
 .modal-close-btn {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 36px;
-  height: 36px;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--border-light);
-  color: #fff;
-  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f4f1ea;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,49 +183,51 @@ body {
 }
 
 .modal-image-container {
-  flex: 1.4;
+  flex: 1.5;
   background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 360px;
+  min-height: 380px;
 }
 
 .modal-image-container img {
   max-width: 100%;
-  max-height: 80vh;
+  max-height: 82vh;
   object-fit: contain;
   display: block;
 }
 
 .modal-info-panel {
   flex: 1;
-  padding: 32px 28px;
+  padding: 36px 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-left: 1px solid var(--border-light);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
   overflow-y: auto;
+  background: #181715;
 }
 
 .modal-title {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   letter-spacing: -0.01em;
+  color: #fdfcf9;
 }
 
 .modal-specs {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--border-light);
-  border-radius: 10px;
-  padding: 16px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 18px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.82rem;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .spec-item {
@@ -213,29 +237,30 @@ body {
 }
 
 .spec-label {
-  color: var(--text-muted);
+  color: #8c857b;
   font-size: 0.72rem;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .spec-val {
-  color: var(--accent-cyan);
+  color: #eeddbb;
   word-break: break-all;
 }
 
 /* Box Richiesta Download */
 .download-prompt-box {
-  background: rgba(0, 210, 255, 0.05);
-  border: 1px solid rgba(0, 210, 255, 0.2);
-  border-radius: 12px;
-  padding: 20px;
+  background: rgba(194, 155, 56, 0.08);
+  border: 1px solid rgba(194, 155, 56, 0.3);
+  border-radius: 10px;
+  padding: 22px;
   text-align: center;
 }
 
 .download-question {
-  font-size: 0.92rem;
-  color: var(--text-main);
-  margin-bottom: 14px;
+  font-size: 0.95rem;
+  color: #f4f1ea;
+  margin-bottom: 16px;
   font-weight: 500;
 }
 
@@ -243,46 +268,49 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
-  background: var(--accent-cyan);
-  color: #08090d;
+  background: #c29b38;
+  color: #121110;
   font-weight: 600;
   font-size: 0.95rem;
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 13px 22px;
+  border-radius: 6px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 18px rgba(0, 210, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(194, 155, 56, 0.25);
 }
 
 .btn-download:hover {
-  background: #fff;
+  background: #e2ba58;
   transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(0, 210, 255, 0.5);
+  box-shadow: 0 6px 26px rgba(194, 155, 56, 0.4);
 }
 
 /* Responsive per Tablet e Smartphone */
 @media (max-width: 860px) {
+  .minimal-header {
+    padding: 20px 24px;
+  }
   .modal-dialog {
     flex-direction: column;
     max-height: 94vh;
   }
   .modal-image-container {
     flex: unset;
-    height: 40vh;
+    height: 42vh;
   }
   .modal-info-panel {
     border-left: none;
-    border-top: 1px solid var(--border-light);
-    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 22px;
   }
   .gallery-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 24px;
   }
   .gallery-wrapper {
-    padding: 16px;
+    padding: 24px 20px;
   }
 }
