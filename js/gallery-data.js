@@ -81,6 +81,25 @@ window.MANDELBROT_DATA = [
     palette: "SwiftCanvas Dynamic Palette",
     engine: "SwiftCanvas / GPU Multi-Precision",
     date: "2026-10"
+  },
+  {
+    id: "mandelbrot_0005",
+    title: "Mandelbrot Ultra-Res (#0005)",
+    category: "Deep Zoom",
+    description: "Rendering originale ad altissima risoluzione (9449 × 6543) salvato direttamente da SwiftCanvas.",
+    thumb: "images/thumbnails/mandelbrot_0005_thumb.jpg",
+    preview: "images/full/mandelbrot_0005_preview.jpg",
+    full: "https://github.com/arturotramontini/Mandelbrot-gallery/releases/download/v1.0.0/mandelbrot_0005.png",
+    downloadUrl: "https://github.com/arturotramontini/Mandelbrot-gallery/releases/download/v1.0.0/mandelbrot_0005.png",
+    filename: "mandelbrot_0005.png",
+    real: "-0.7436438870371587047521915061",
+    imag: "+0.1318259042053119704931881729",
+    zoom: "5.4 × 10²²",
+    iterations: 8000,
+    resolution: "9449 × 6543 (~10K - 4.9 MB)",
+    palette: "SwiftCanvas Dynamic Palette",
+    engine: "SwiftCanvas / GPU Multi-Precision",
+    date: "2026-10"
   }
 ];
 
