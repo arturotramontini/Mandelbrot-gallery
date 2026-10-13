@@ -19,11 +19,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const data = window.MANDELBROT_DATA || [];
 
-  // Renderizza solo la griglia di immagini pulita
+  // Renderizza i quadri in righe da massimo 3 quadri, con altezza uniforme
   function renderGrid() {
-    galleryGrid.innerHTML = data.map((item, idx) => `
-      <div class="image-item" onclick="openModal(${idx})" title="${item.title}">
-        <img src="${item.thumb || item.full}" alt="${item.title}" loading="lazy">
+    const rows = [];
+    for (let i = 0; i < data.length; i += 3) {
+      rows.push(data.slice(i, i + 3));
+    }
+
+    galleryGrid.innerHTML = rows.map((rowItems, rowIdx) => `
+      <div class="gallery-row">
+        ${rowItems.map((item, colIdx) => {
+          const globalIdx = rowIdx * 3 + colIdx;
+          return `
+            <div class="image-item" onclick="openModal(${globalIdx})" title="${item.title}">
+              <img src="${item.thumb || item.full}" alt="${item.title}" loading="lazy">
+            </div>
+          `;
+        }).join('')}
       </div>
     `).join('');
   }

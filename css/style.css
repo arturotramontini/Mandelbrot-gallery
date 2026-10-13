@@ -89,21 +89,32 @@ body {
 }
 
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 380px);
-  gap: 40px;
-  justify-content: start;
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
   width: max-content;
 }
 
-/* Canvas Image Items (Quadri fisici con cornice in legno scuro venato) */
+.gallery-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 42px;
+  height: 280px; /* Altezza maggiorata e uniforme per ogni riga */
+  box-sizing: border-box;
+}
+
+/* Canvas Image Items (Altezza fissa pari alla riga, larghezza fedele al rapporto H/W dell'immagine) */
 .image-item {
-  width: 380px;
-  height: 213.75px; /* rapporto 16:9 fisso al millimetro */
+  height: 280px; /* Altezza uguale a quella della riga */
+  width: auto;   /* La larghezza si adatta al millimetro al rapporto nativo H/W dell'immagine */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   position: relative;
   box-sizing: border-box;
-  padding: 11px; /* Spessore autentico della cornice in legno */
+  padding: 12px; /* Spessore autentico della cornice in legno */
   background-color: #2b1c13;
   background-image: url('../images/wood_frame_texture.jpg');
   background-size: 240px 240px;
@@ -115,9 +126,9 @@ body {
   box-shadow: 
     inset 1px 1px 2px rgba(255, 255, 255, 0.28),
     inset -1px -1px 3px rgba(0, 0, 0, 0.8),
-    0 8px 18px -2px rgba(35, 22, 12, 0.35),
-    0 22px 42px -6px rgba(0, 0, 0, 0.3),
-    0 2px 5px rgba(0, 0, 0, 0.2);
+    0 8px 20px -2px rgba(35, 22, 12, 0.35),
+    0 24px 46px -6px rgba(0, 0, 0, 0.3),
+    0 2px 6px rgba(0, 0, 0, 0.2);
 
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
 }
@@ -127,15 +138,15 @@ body {
   box-shadow: 
     inset 1px 1px 2px rgba(255, 255, 255, 0.35),
     inset -1px -1px 3px rgba(0, 0, 0, 0.85),
-    0 14px 28px -3px rgba(35, 22, 12, 0.42),
-    0 32px 55px -8px rgba(0, 0, 0, 0.38),
+    0 14px 30px -3px rgba(35, 22, 12, 0.42),
+    0 34px 58px -8px rgba(0, 0, 0, 0.38),
     0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 .image-item img {
-  width: 100%;
   height: 100%;
-  object-fit: cover;
+  width: auto; /* Mantiene esattamente il rapporto altezza/larghezza originale senza ritaglio */
+  object-fit: contain;
   display: block;
   border-radius: 2px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.65), inset 0 0 8px rgba(0, 0, 0, 0.6);
