@@ -79,12 +79,14 @@ body {
   letter-spacing: 0.12em;
 }
 
-/* Gallery Room & Canvas Grid (Quadri ancorati alla parete) */
+/* Gallery Room & Canvas Grid (Quadri allineati al centro) */
 .gallery-wrapper {
-  padding: 48px 60px 80px;
-  margin: 0;
+  padding: 48px 40px 80px;
+  margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
   overflow-x: auto;
 }
 
@@ -92,16 +94,20 @@ body {
   display: flex;
   flex-direction: column;
   gap: 42px;
+  align-items: center;
   width: max-content;
+  margin: 0 auto;
 }
 
 .gallery-row {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 42px;
   height: 280px; /* Altezza maggiorata e uniforme per ogni riga */
   box-sizing: border-box;
+  width: 100%;
 }
 
 /* Canvas Image Items (Altezza fissa pari alla riga, larghezza fedele al rapporto H/W dell'immagine) */
