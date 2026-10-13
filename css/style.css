@@ -31,11 +31,11 @@
 }
 
 body {
-  background-color: #cbbba2;
+  background-color: #d2c0a5;
   background-image: 
-    radial-gradient(ellipse at 50% 10%, rgba(255, 248, 235, 0.2) 0%, rgba(20, 15, 10, 0.15) 100%),
+    radial-gradient(ellipse at 50% 12%, rgba(255, 248, 235, 0.18) 0%, rgba(30, 22, 12, 0.1) 100%),
     url('../images/gallery_wall_texture.jpg');
-  background-size: cover, 950px 950px;
+  background-size: cover, 1100px 1100px;
   background-repeat: no-repeat, repeat;
   background-attachment: fixed;
   color: var(--text-primary);
@@ -51,8 +51,8 @@ body {
   padding: 28px 48px 18px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(40, 30, 20, 0.12);
-  background: rgba(203, 187, 162, 0.65);
+  border-bottom: 1px solid rgba(40, 30, 20, 0.1);
+  background: rgba(210, 192, 165, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
