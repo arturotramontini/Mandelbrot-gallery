@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arturo Tramontini | Mandelbrot Fractal Explorer & Gallery</title>
+  
+  <meta name="description" content="Galleria scientifica di frattali di Mandelbrot ad altissima precisione. Rendering GPU e algoritmi di precisione arbitraria di Arturo Tramontini. Esplora e scarica immagini ad alta definizione.">
+  <meta name="author" content="Arturo Tramontini">
+  <meta name="keywords" content="Mandelbrot, Frattali, GPU Compute, MyFloat256, Rust, Deep Zoom, Matematica Computazionale">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="Arturo Tramontini — Mandelbrot Exploration Gallery">
+  <meta property="og:description" content="Esplorazioni dell'Insieme di Mandelbrot a profondità estreme con calcolo GPU e precisione arbitraria. Immagini scaricabili ad alta risoluzione.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://arturotramontini.it">
+  <meta property="og:image" content="images/thumbnails/mandelbrot_01_seahorse_thumb.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%22><text y=%2226%22 font-size=%2228%22>🌀</text></svg>">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon">M</div>
+        <div class="brand-text">
+          <h1>Arturo Tramontini</h1>
+          <span>Mandelbrot & GPU Computing</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#gallery" class="nav-link">Galleria</a>
+        <a href="#tecnologia" class="nav-link">Architettura & Algoritmi</a>
+        <a href="#contatti" class="nav-link">Contatti</a>
+      </nav>
+
+      <a href="#contatti" class="btn-header-contact">Contattami</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge-wrap">
+        <span class="tech-badge">⚡ GPU Compute Shader</span>
+        <span class="tech-badge purple">🔬 MyFloat256 Emulated Precision</span>
+        <span class="tech-badge amber">🦀 Rust Powered</span>
+      </div>
+
+      <h1 class="hero-title">
+        Esplorazione dell'<span class="gradient-text">Insieme di Mandelbrot</span> a Profondità Estreme
+      </h1>
+
+      <p class="hero-lead">
+        Una collezione di rendering computazionali ad altissima definizione dell'insieme di Mandelbrot. 
+        Calcolati mediante algoritmi dedicati su GPU con aritmetica a virgola mobile estesa (256-bit) 
+        per superare il limite di precisione dell'hardware standard. Esplora le coordinate e scarica le immagini in formato originale.
+      </p>
+
+      <div class="hero-stats-row">
+        <div class="stat-item">
+          <span class="stat-number">256-bit</span>
+          <span class="stat-label">Precisione Numerica</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">10⁴⁵+</span>
+          <span class="stat-label">Capacità di Zoom</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">Ultra HD</span>
+          <span class="stat-label">Risoluzione Massima</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100% Free</span>
+          <span class="stat-label">Download Libero</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls Bar -->
+  <section class="controls-section" id="gallery">
+    <div class="container">
+      <div class="controls-wrapper">
+        <div class="filter-pills">
+          <button class="filter-btn active" data-filter="all">Tutte le Aree</button>
+          <button class="filter-btn" data-filter="Seahorse">Seahorse Valley</button>
+          <button class="filter-btn" data-filter="Spirali">Spirali</button>
+          <button class="filter-btn" data-filter="Minibrot">Mini-Brot</button>
+          <button class="filter-btn" data-filter="Sceptre">Sceptre Valley</button>
+          <button class="filter-btn" data-filter="Elephant">Elephant Valley</button>
+        </div>
+
+        <div class="search-box">
+          <svg class="search-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input type="text" id="search-input" class="search-input" placeholder="Cerca titolo, coordinate, palette...">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Grid Section -->
+  <section class="gallery-section">
+    <div class="container">
+      <main class="gallery-grid" id="gallery-grid">
+        <!-- Rendered dynamically by js/app.js -->
+      </main>
+    </div>
+  </section>
+
+  <!-- Technology / Math Explainer Section -->
+  <section class="tech-explainer" id="tecnologia">
+    <div class="container">
+      <div class="section-head">
+        <h2>Dietro le Quinte del Calcolo</h2>
+        <p>Come vengono calcolati e renderizzati i frattali a profondità microscopiche senza perdita di precisione numerica.</p>
+      </div>
+
+      <div class="tech-cards-grid">
+        <div class="tech-info-card">
+          <div class="tech-card-icon">⚡</div>
+          <h3>Accelerazione GPU Parallela</h3>
+          <p>
+            Ogni pixel rappresenta un punto nel piano complesso <em>c = x + iy</em> e subisce fino a centinaia di migliaia di iterazioni dell'equazione ricorsiva 
+            <em>z<sub>n+1</sub> = z<sub>n</sub>² + c</em>. L'elaborazione sfrutta migliaia di core GPU simultaneamente.
+          </p>
+        </div>
+
+        <div class="tech-info-card">
+          <div class="tech-card-icon">🎯</div>
+          <h3>Aritmetica Estesa MyFloat256</h3>
+          <p>
+            I normali numeri float IEEE-754 a 64 bit (double) degradano a fattori di zoom prossimi a 10¹⁴ producendo pixel squadrati. 
+            Il modulo proprietario a precisione estesa permette di scendere a zoom oltre 10⁴⁵ preservando nitidezza assoluta.
+          </p>
+        </div>
+
+        <div class="tech-info-card">
+          <div class="tech-card-icon">🎨</div>
+          <h3>Ombreggiatura Continua & Palette</h3>
+          <p>
+            Per evitare le righe di discontinuità cromatica (color banding), il rendering applica un algoritmo a potenziale continuo normalizzato 
+            calcolando valori frazionari di iterazione tramite logaritmi iterati di <em>|z|</em>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-hidden="true">
+    <div class="lightbox-content">
+      <button class="lightbox-close-btn" id="lightbox-close" aria-label="Chiudi visualizzatore">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="lightbox-image-pane">
+        <img class="lightbox-image" id="lightbox-image" src="" alt="Anteprima Mandelbrot a schermo intero">
+      </div>
+
+      <div class="lightbox-details-pane">
+        <h2 class="lightbox-meta-title" id="lightbox-title">-</h2>
+        <p class="lightbox-meta-desc" id="lightbox-desc">-</p>
+
+        <div class="meta-group">
+          <span class="meta-group-title">Coordinate Complesse (Centro)</span>
+          <div class="coord-display">
+            <div><strong>Re:</strong> <span id="lightbox-real">-</span></div>
+            <div style="margin-top: 4px;"><strong>Im:</strong> <span id="lightbox-imag">-</span></div>
+          </div>
+          <button class="btn-copy-coords" id="btn-copy-coords">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            Copia Coordinate
+          </button>
+        </div>
+
+        <div class="meta-group">
+          <span class="meta-group-title">Specifiche Tecniche</span>
+          <div class="spec-grid">
+            <div class="spec-grid-item">
+              <span>Fattore Zoom</span>
+              <span id="lightbox-zoom">-</span>
+            </div>
+            <div class="spec-grid-item">
+              <span>Iterazioni Max</span>
+              <span id="lightbox-iter">-</span>
+            </div>
+            <div class="spec-grid-item">
+              <span>Risoluzione</span>
+              <span id="lightbox-res">-</span>
+            </div>
+            <div class="spec-grid-item">
+              <span>Palette</span>
+              <span id="lightbox-palette">-</span>
+            </div>
+            <div class="spec-grid-item" style="grid-column: 1 / -1;">
+              <span>Motore di Calcolo</span>
+              <span id="lightbox-engine">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lightbox-actions">
+          <a class="btn-download-big" id="lightbox-download-btn" href="#" download="">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Scarica Immagine ad Alta Risoluzione
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notice -->
+  <div class="toast-notice" id="toast-notice">
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+    <span class="toast-msg">Operazione completata!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="contatti">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-author">
+          <h3>Arturo Tramontini</h3>
+          <p>Sviluppo Software, Architettura GPU & Algoritmi Frattali</p>
+        </div>
+
+        <div class="footer-contacts">
+          <a href="mailto:tramontiniarturo@gmail.com" class="contact-chip">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            tramontiniarturo@gmail.com
+          </a>
+          <a href="https://wa.me/393519798493" target="_blank" rel="noopener" class="contact-chip">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            WhatsApp / Telegram
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Arturo Tramontini — Tutti i diritti riservati</div>
+        <div>Dominio ufficiale: arturotramontini.it</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/gallery-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
