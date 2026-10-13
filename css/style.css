@@ -96,24 +96,40 @@ body {
   width: max-content;
 }
 
-/* Canvas Image Items (Quadri fisici con dimensioni e posizione ancorate) */
+/* Canvas Image Items (Quadri fisici con cornice in legno scuro venato) */
 .image-item {
   width: 380px;
   height: 213.75px; /* rapporto 16:9 fisso al millimetro */
   flex-shrink: 0;
   position: relative;
+  box-sizing: border-box;
+  padding: 11px; /* Spessore autentico della cornice in legno */
+  background-color: #2b1c13;
+  background-image: url('../images/wood_frame_texture.jpg');
+  background-size: 240px 240px;
   border-radius: 4px;
   overflow: hidden;
-  background-color: #0d0e12;
   cursor: pointer;
-  box-shadow: var(--shadow-frame);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  
+  /* Lavorazione 3D della cornice in legno + ombra proiettata sulla parete */
+  box-shadow: 
+    inset 1px 1px 2px rgba(255, 255, 255, 0.28),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.8),
+    0 8px 18px -2px rgba(35, 22, 12, 0.35),
+    0 22px 42px -6px rgba(0, 0, 0, 0.3),
+    0 2px 5px rgba(0, 0, 0, 0.2);
+
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
 }
 
 .image-item:hover {
   transform: translateY(-8px) scale(1.015);
-  box-shadow: var(--shadow-frame-hover);
+  box-shadow: 
+    inset 1px 1px 2px rgba(255, 255, 255, 0.35),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.85),
+    0 14px 28px -3px rgba(35, 22, 12, 0.42),
+    0 32px 55px -8px rgba(0, 0, 0, 0.38),
+    0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 .image-item img {
@@ -121,11 +137,13 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.65), inset 0 0 8px rgba(0, 0, 0, 0.6);
   transition: transform 0.5s ease;
 }
 
 .image-item:hover img {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 /* Modal Popup (Exhibition Darkroom Viewer) */
