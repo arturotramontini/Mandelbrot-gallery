@@ -6,7 +6,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const galleryGrid = document.getElementById('gallery-grid');
   const backdrop = document.getElementById('modal-backdrop');
-  const closeBtn = document.getElementById('modal-close');
   
   const modalImg = document.getElementById('modal-image');
   const modalTitle = document.getElementById('modal-title');
@@ -60,10 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
-  closeBtn.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', (e) => {
-    if (e.target === backdrop) closeModal();
-  });
+  // Chiusura modale esclusivamente con il tasto ESC
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && backdrop.classList.contains('active')) {

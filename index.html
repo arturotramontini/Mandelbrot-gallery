@@ -30,52 +30,56 @@
     </div>
   </main>
 
-  <!-- Modal Dettagli & Download -->
+  <!-- Modal Dettagli & Download (Due sezioni orizzontali: Quadro a tutto schermo in alto, riquadro info fisso in basso, chiusura solo con tasto ESC) -->
   <div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
-      <button class="modal-close-btn" id="modal-close" aria-label="Chiudi">✕</button>
-
-      <!-- Immagine ingrandita -->
+      <!-- 1. Parte in alto: Quadro a tutto schermo mantenendo le proporzioni native -->
       <div class="modal-image-container">
         <img id="modal-image" src="" alt="Mandelbrot preview">
       </div>
 
-      <!-- Scheda Dati & Richiesta Download -->
+      <!-- 2. Parte in basso: Riquadro a dimensione fissa con informazioni e download -->
       <div class="modal-info-panel">
-        <h2 class="modal-title" id="modal-title">-</h2>
+        <div class="modal-info-content">
+          <!-- Colonna Sinistra: Titolo e promemoria tasto ESC -->
+          <div class="modal-meta-left">
+            <h2 class="modal-title" id="modal-title">-</h2>
+            <span class="modal-esc-hint">Premi <kbd>ESC</kbd> per chiudere</span>
+          </div>
 
-        <div class="modal-specs">
-          <div class="spec-item">
-            <span class="spec-label">Centro Re:</span>
-            <span class="spec-val" id="modal-real">-</span>
+          <!-- Colonna Centrale: Dati tecnici Frattale -->
+          <div class="modal-specs-grid">
+            <div class="spec-cell">
+              <span class="spec-label">Centro Re</span>
+              <span class="spec-val" id="modal-real">-</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-label">Centro Im</span>
+              <span class="spec-val" id="modal-imag">-</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-label">Zoom</span>
+              <span class="spec-val" id="modal-zoom">-</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-label">Iterazioni</span>
+              <span class="spec-val" id="modal-iter">-</span>
+            </div>
+            <div class="spec-cell spec-cell-wide">
+              <span class="spec-label">Risoluzione</span>
+              <span class="spec-val" id="modal-res">-</span>
+            </div>
           </div>
-          <div class="spec-item">
-            <span class="spec-label">Centro Im:</span>
-            <span class="spec-val" id="modal-imag">-</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Zoom:</span>
-            <span class="spec-val" id="modal-zoom">-</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Iterazioni:</span>
-            <span class="spec-val" id="modal-iter">-</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Risoluzione:</span>
-            <span class="spec-val" id="modal-res">-</span>
-          </div>
-        </div>
 
-        <!-- Box richiesta download -->
-        <div class="download-prompt-box">
-          <p class="download-question">Vuoi scaricare questa immagine ad alta risoluzione?</p>
-          <a class="btn-download" id="modal-download-btn" href="#" download="" target="_blank">
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-            </svg>
-            Scarica File Originale
-          </a>
+          <!-- Colonna Destra: Bottone Scarica File Originale -->
+          <div class="modal-actions-right">
+            <a class="btn-download" id="modal-download-btn" href="#" download="" target="_blank">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+              </svg>
+              Scarica Originale
+            </a>
+          </div>
         </div>
       </div>
     </div>

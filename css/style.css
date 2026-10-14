@@ -169,13 +169,13 @@ body {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.65), inset 0 0 8px rgba(0, 0, 0, 0.6);
 }
 
-/* Modal Popup (Exhibition Darkroom Viewer) */
+/* Modal Popup (Exhibition Darkroom Viewer - Due parti orizzontali) */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(14, 13, 12, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(10, 9, 8, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -183,7 +183,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
-  padding: 24px;
+  padding: 0;
 }
 
 .modal-backdrop.active {
@@ -192,165 +192,178 @@ body {
 }
 
 .modal-dialog {
-  background: #181715;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  max-width: 1140px;
-  width: 100%;
-  max-height: 90vh;
+  background: #0d0c0b;
+  width: 100vw;
+  height: 100vh;
   display: flex;
+  flex-direction: column; /* Suddiviso in due parti orizzontali: alto e basso */
   overflow: hidden;
   position: relative;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95);
   color: #f4f1ea;
 }
 
-.modal-close-btn {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #f4f1ea;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 20;
-  transition: all 0.2s ease;
-}
-
-.modal-close-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
-}
-
+/* 1. Parte in alto: sfrutta tutto lo spazio disponibile mantenendo le proporzioni del quadro */
 .modal-image-container {
-  flex: 1.5;
-  background: #000;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  background: #060504;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 380px;
+  padding: 20px 28px 16px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .modal-image-container img {
   max-width: 100%;
-  max-height: 82vh;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
   display: block;
+  border-radius: 3px;
+  box-shadow: 0 14px 50px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
+/* 2. Parte in basso: riquadro a dimensione fissa, grande il necessario per contenere le informazioni */
 .modal-info-panel {
-  flex: 1;
-  padding: 36px 32px;
+  flex: 0 0 auto;
+  width: 100%;
+  background: #151412;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 14px 32px 16px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.modal-info-content {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-  overflow-y: auto;
-  background: #181715;
+  gap: 24px;
+  max-width: 1680px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Colonna sinistra */
+.modal-meta-left {
+  flex: 0 0 auto;
+  max-width: 320px;
 }
 
 .modal-title {
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  margin-bottom: 24px;
   letter-spacing: -0.01em;
   color: #fdfcf9;
+  margin: 0 0 6px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.modal-specs {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  padding: 18px;
+.modal-esc-hint {
+  font-size: 0.76rem;
+  color: #8c857b;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.modal-esc-hint kbd {
+  display: inline-block;
+  padding: 2px 7px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.82rem;
-  margin-bottom: 28px;
+  font-size: 0.72rem;
+  color: #eeddbb;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  font-weight: 600;
 }
 
-.spec-item {
+/* Colonna centrale: scheda tecnica a griglia compatta */
+.modal-specs-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(4, auto) 1fr;
+  gap: 12px 20px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  align-items: center;
+}
+
+.spec-cell {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
+}
+
+.spec-cell-wide {
+  grid-column: span 1;
 }
 
 .spec-label {
   color: #8c857b;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
 .spec-val {
   color: #eeddbb;
-  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Box Richiesta Download */
-.download-prompt-box {
-  background: rgba(194, 155, 56, 0.08);
-  border: 1px solid rgba(194, 155, 56, 0.3);
-  border-radius: 10px;
-  padding: 22px;
-  text-align: center;
-}
-
-.download-question {
-  font-size: 0.95rem;
-  color: #f4f1ea;
-  margin-bottom: 16px;
-  font-weight: 500;
+/* Colonna destra: pulsante di download */
+.modal-actions-right {
+  flex: 0 0 auto;
 }
 
 .btn-download {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  width: 100%;
+  gap: 8px;
   background: #c29b38;
   color: #121110;
   font-weight: 600;
-  font-size: 0.95rem;
-  padding: 13px 22px;
+  font-size: 0.88rem;
+  padding: 11px 20px;
   border-radius: 6px;
   text-decoration: none;
   cursor: pointer;
+  white-space: nowrap;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 20px rgba(194, 155, 56, 0.25);
+  box-shadow: 0 4px 18px rgba(194, 155, 56, 0.25);
 }
 
 .btn-download:hover {
   background: #e2ba58;
   transform: translateY(-2px);
-  box-shadow: 0 6px 26px rgba(194, 155, 56, 0.4);
+  box-shadow: 0 6px 24px rgba(194, 155, 56, 0.4);
 }
 
-/* Responsive per Tablet e Smartphone */
-@media (max-width: 860px) {
-  .minimal-header {
-    padding: 20px 24px;
-  }
-  .modal-dialog {
+/* Responsive per schermi più piccoli */
+@media (max-width: 960px) {
+  .modal-info-content {
     flex-direction: column;
-    max-height: 94vh;
+    align-items: stretch;
+    gap: 12px;
   }
-  .modal-image-container {
-    flex: unset;
-    height: 42vh;
+  .modal-specs-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .modal-info-panel {
-    border-left: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 22px;
+  .btn-download {
+    width: 100%;
   }
 }
