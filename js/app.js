@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalZoom = document.getElementById('modal-zoom');
   const modalIter = document.getElementById('modal-iter');
   const modalRes = document.getElementById('modal-res');
+  const modalViews = document.getElementById('modal-views');
+  const siteViewsCount = document.getElementById('site-views-count');
   const modalDownload = document.getElementById('modal-download-btn');
 
   const data = window.MANDELBROT_DATA || [];
@@ -73,6 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
     modalIter.textContent = item.iterations ? item.iterations.toLocaleString() : '-';
     modalRes.textContent = item.resolution || 'Originale';
 
+    if (modalViews) modalViews.textContent = '...';
+    trackArtworkView(item.id);
+
     modalDownload.href = item.downloadUrl || item.full;
     modalDownload.setAttribute('download', item.filename || `${item.id}.png`);
 
@@ -87,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Chiusura modale esclusivamente con il tasto ESC
-
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && backdrop.classList.contains('active')) {
       closeModal();
@@ -109,5 +113,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Gestione Contatori Visite e Quadri (100% anonimo, senza cookie, GDPR-compliant)
+  async function trackSiteVisit() {
+    try {
+      const alreadyVisited = sessionStorage.getItem('arturo_visited_site');
+      const action = alreadyVisited ? 'get' : 'hit';
+      const res = await fetch(`counter.php?action=${action}&target=site`);
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && siteViewsCount) {
+          siteViewsCount.textContent = Number(json.site).toLocaleString();
+          sessionStorage.setItem('arturo_visited_site', '1');
+        }
+      }
+    } catch (e) {
+      // silenzioso in caso di offline
+    }
+  }
+
+  async function trackArtworkView(artworkId) {
+    if (!artworkId) return;
+    try {
+      const sessionKey = 'arturo_viewed_' + artworkId;
+      const alreadyViewed = sessionStorage.getItem(sessionKey);
+      const action = alreadyViewed ? 'get' : 'hit';
+      const res = await fetch(`counter.php?action=${action}&target=${encodeURIComponent(artworkId)}`);
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && modalViews) {
+          const views = (json.artworks && json.artworks[artworkId] !== undefined)
+            ? json.artworks[artworkId]
+            : (json.views || 1);
+          modalViews.textContent = Number(views).toLocaleString();
+          sessionStorage.setItem(sessionKey, '1');
+        }
+      }
+    } catch (e) {
+      if (modalViews) modalViews.textContent = '-';
+    }
+  }
+
   renderGrid();
+  trackSiteVisit();
 });
