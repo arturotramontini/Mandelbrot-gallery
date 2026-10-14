@@ -10,6 +10,7 @@
   --text-secondary: #6e675f;
   --text-muted: #948c82;
   --border-subtle: rgba(50, 40, 30, 0.08);
+  --grid-line: rgba(55, 42, 30, 0.16);
   --accent-gold: #c29b38;
   --accent-dark: #121110;
   
@@ -31,13 +32,12 @@
 }
 
 body {
-  background-color: #d2c0a5;
-  background-image: 
-    radial-gradient(ellipse at 50% 12%, rgba(255, 248, 235, 0.18) 0%, rgba(30, 22, 12, 0.1) 100%),
-    url('../images/gallery_wall_texture.jpg');
-  background-size: cover, 1100px 1100px;
-  background-repeat: no-repeat, repeat;
-  background-attachment: fixed;
+  background-color: #dfcbaf;
+  background-image: url('../images/gallery_wall_texture.jpg');
+  background-size: 1100px 1100px;
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-attachment: scroll;
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   min-height: 100vh;
@@ -48,11 +48,11 @@ body {
 
 /* Minimal Gallery Header */
 .minimal-header {
-  padding: 28px 48px 18px;
+  padding: 24px 60px 18px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba(40, 30, 20, 0.1);
-  background: rgba(210, 192, 165, 0.6);
+  background: rgba(223, 203, 175, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -79,35 +79,51 @@ body {
   letter-spacing: 0.12em;
 }
 
-/* Gallery Room & Canvas Grid (Quadri allineati al centro) */
+/* Gallery Room & Positioning Grid (Quadri ancorati alla parete con coordinate fisse) */
 .gallery-wrapper {
-  padding: 48px 40px 80px;
-  margin: 0 auto;
+  padding: 36px 60px 80px;
+  margin: 0;
   width: 100%;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
+  display: block;
   overflow-x: auto;
 }
 
 .gallery-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 42px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 510px);
+  border-top: 1px solid var(--grid-line);
+  border-left: 1px solid var(--grid-line);
   width: max-content;
-  margin: 0 auto;
+  margin: 0;
 }
 
-.gallery-row {
+/* Cella / Riquadro della griglia di posizionamento */
+.grid-cell {
+  width: 510px;
+  height: 320px;
+  border-right: 1px solid var(--grid-line);
+  border-bottom: 1px solid var(--grid-line);
+  position: relative;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 42px;
-  height: 280px; /* Altezza maggiorata e uniforme per ogni riga */
   box-sizing: border-box;
-  width: 100%;
+}
+
+/* Numero progressivo in alto a sinistra del riquadro */
+.cell-number {
+  position: absolute;
+  top: 7px;
+  left: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #141210;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  user-select: none;
+  pointer-events: none;
 }
 
 /* Canvas Image Items (Altezza fissa pari alla riga, larghezza fedele al rapporto H/W dell'immagine) */

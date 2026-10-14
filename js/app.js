@@ -19,25 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const data = window.MANDELBROT_DATA || [];
 
-  // Renderizza i quadri in righe da massimo 3 quadri, con altezza uniforme
+  // Renderizza i riquadri della griglia di posizionamento (3 colonne) con numero progressivo
   function renderGrid() {
-    const rows = [];
-    for (let i = 0; i < data.length; i += 3) {
-      rows.push(data.slice(i, i + 3));
-    }
-
-    galleryGrid.innerHTML = rows.map((rowItems, rowIdx) => `
-      <div class="gallery-row">
-        ${rowItems.map((item, colIdx) => {
-          const globalIdx = rowIdx * 3 + colIdx;
-          return `
-            <div class="image-item" onclick="openModal(${globalIdx})" title="${item.title}">
-              <img src="${item.thumb || item.full}" alt="${item.title}" loading="lazy">
-            </div>
-          `;
-        }).join('')}
-      </div>
-    `).join('');
+    galleryGrid.innerHTML = data.map((item, index) => {
+      const num = index + 1;
+      return `
+        <div class="grid-cell" id="riquadro-${num}">
+          <span class="cell-number">${num}</span>
+          <div class="image-item" onclick="openModal(${index})" title="${item.title}">
+            <img src="${item.thumb || item.full}" alt="${item.title}" loading="lazy">
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
   // Apertura modale al click sull'immagine
