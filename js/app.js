@@ -71,5 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Evidenzia in rosso il numero progressivo quando il mouse passa sul quadro
+  galleryGrid.addEventListener('mouseover', (e) => {
+    const item = e.target.closest('.image-item');
+    if (item && item.parentElement) {
+      item.parentElement.classList.add('item-hovered');
+    }
+  });
+
+  galleryGrid.addEventListener('mouseout', (e) => {
+    const item = e.target.closest('.image-item');
+    if (item && item.parentElement) {
+      item.parentElement.classList.remove('item-hovered');
+    }
+  });
+
   renderGrid();
 });
