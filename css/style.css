@@ -111,17 +111,18 @@ body {
   box-sizing: border-box;
 }
 
-/* Intestazione riquadro (Numero progressivo + Risoluzione a lato) */
+/* Intestazione riquadro (Numero progressivo + Risoluzione, Formato e Dimensione a lato) */
 .cell-header {
   position: absolute;
   top: 10px;
   left: 12px;
   display: flex;
   align-items: baseline;
-  gap: 14px;
+  gap: 12px;
   user-select: none;
   pointer-events: none;
   z-index: 5;
+  white-space: nowrap;
 }
 
 /* Numero progressivo in alto a sinistra del riquadro */
@@ -135,8 +136,11 @@ body {
   transition: color 0.15s ease;
 }
 
-/* Risoluzione del quadro a lato del numero progressivo */
-.cell-resolution {
+/* Dati tecnici del quadro a lato del numero: Risoluzione · Tipo · MegaByte */
+.cell-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   font-weight: 500;
@@ -146,15 +150,24 @@ body {
   transition: color 0.15s ease;
 }
 
+.cell-dot {
+  opacity: 0.45;
+  font-size: 10px;
+}
+
+.cell-ext {
+  font-weight: 600;
+}
+
 /* Enfatizza il numero progressivo in rosso quando il mouse passa sul quadro */
 .grid-cell:has(.image-item:hover) .cell-number,
 .grid-cell.item-hovered .cell-number {
   color: #d32f2f;
 }
 
-.grid-cell:has(.image-item:hover) .cell-resolution,
-.grid-cell.item-hovered .cell-resolution {
-  color: rgba(30, 20, 10, 0.85);
+.grid-cell:has(.image-item:hover) .cell-meta,
+.grid-cell.item-hovered .cell-meta {
+  color: rgba(30, 20, 10, 0.88);
 }
 
 /* Canvas Image Items (Quadri fisici con cornice in legno scuro venato - stabili senza enfatizzazione al passaggio del mouse) */

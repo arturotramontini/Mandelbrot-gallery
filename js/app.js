@@ -18,24 +18,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const data = window.MANDELBROT_DATA || [];
 
-  // Estrae la risoluzione in pixel (es. "7680 × 4320") dalla stringa dei dati
-  function getCleanResolution(res) {
-    if (!res) return '';
+  // Estrae risoluzione, tipo file e dimensione in MB dai dati del frattale
+  function getItemMeta(item) {
+    const res = item.resolution || '';
     const normalized = res.replace(/\\u00d7/g, '×');
-    const match = normalized.match(/^([0-9]+\s*×\s*[0-9]+)/);
-    return match ? match[1] : normalized.split('(')[0].trim();
+    const resMatch = normalized.match(/^([0-9]+\s*×\s*[0-9]+)/);
+    const cleanRes = resMatch ? resMatch[1] : normalized.split('(')[0].trim();
+
+    const mbMatch = normalized.match(/([\d.]+)\s*MB/i);
+    const sizeMb = mbMatch ? (mbMatch[1] + ' MB') : '';
+
+    let ext = 'PNG';
+    if (item.filename && item.filename.includes('.')) {
+      ext = item.filename.split('.').pop().toUpperCase();
+    }
+    return { cleanRes, ext, sizeMb };
   }
 
-  // Renderizza i riquadri della griglia di posizionamento (3 colonne) con numero progressivo e risoluzione
+  // Renderizza i riquadri della griglia di posizionamento (3 colonne) con numero, risoluzione, tipo file e dimensione MB
   function renderGrid() {
     galleryGrid.innerHTML = data.map((item, index) => {
       const num = index + 1;
-      const res = getCleanResolution(item.resolution);
+      const meta = getItemMeta(item);
       return `
         <div class="grid-cell" id="riquadro-${num}">
           <div class="cell-header">
             <span class="cell-number">${num}</span>
-            <span class="cell-resolution">${res}</span>
+            <div class="cell-meta">
+              <span class="cell-resolution">${meta.cleanRes}</span>
+              <span class="cell-dot">·</span>
+              <span class="cell-ext">${meta.ext}</span>
+              <span class="cell-dot">·</span>
+              <span class="cell-size">${meta.sizeMb}</span>
+            </div>
           </div>
           <div class="image-item" onclick="openModal(${index})" title="${item.title}">
             <img src="${item.thumb || item.full}" alt="${item.title}" loading="lazy">
