@@ -18,13 +18,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const data = window.MANDELBROT_DATA || [];
 
-  // Renderizza i riquadri della griglia di posizionamento (3 colonne) con numero progressivo
+  // Estrae la risoluzione in pixel (es. "7680 × 4320") dalla stringa dei dati
+  function getCleanResolution(res) {
+    if (!res) return '';
+    const normalized = res.replace(/\\u00d7/g, '×');
+    const match = normalized.match(/^([0-9]+\s*×\s*[0-9]+)/);
+    return match ? match[1] : normalized.split('(')[0].trim();
+  }
+
+  // Renderizza i riquadri della griglia di posizionamento (3 colonne) con numero progressivo e risoluzione
   function renderGrid() {
     galleryGrid.innerHTML = data.map((item, index) => {
       const num = index + 1;
+      const res = getCleanResolution(item.resolution);
       return `
         <div class="grid-cell" id="riquadro-${num}">
-          <span class="cell-number">${num}</span>
+          <div class="cell-header">
+            <span class="cell-number">${num}</span>
+            <span class="cell-resolution">${res}</span>
+          </div>
           <div class="image-item" onclick="openModal(${index})" title="${item.title}">
             <img src="${item.thumb || item.full}" alt="${item.title}" loading="lazy">
           </div>
