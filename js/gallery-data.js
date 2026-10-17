@@ -515,7 +515,7 @@ window.MANDELBROT_DATA = [
     imag: "-0.0193001394443217226881144572",
     zoom: "8.0 × 10^56",
     iterations: 12000,
-    resolution: "16000 × 9000 (16K UHD - 217.8 MB)",
+    resolution: "16000 × 9000 (16K UHD - 193.3 MB)",
     palette: "SwiftCanvas Dynamic Palette",
     engine: "SwiftCanvas / GPU Multi-Precision",
     date: "2026-10"
